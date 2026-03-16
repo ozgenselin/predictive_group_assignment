@@ -1,0 +1,16 @@
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual Environments (so you don't upload thousands of junk files!)
+antigravity_env/
+venv/
+env/
+.env
+
+# Python Cache files
+__pycache__/
+*.pyc
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
