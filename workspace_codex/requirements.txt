@@ -1,0 +1,15 @@
+# MSIN0097 Agentic AI Benchmark - Environment Requirements
+# Python version: 3.11.x
+
+# Core Data Science Libraries
+pandas==2.2.0
+numpy==1.26.4
+scikit-learn==1.4.1.post1
+
+# Data Ingestion & Utilities
+requests==2.31.0
+ucimlrepo==0.0.7
+
+# Jupyter Notebook Support
+jupyter==1.0.0
+notebook==7.0.7

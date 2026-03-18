@@ -1,0 +1,7 @@
+EDA Narrative Summary
+--------------------------------------------------------------------------------
+Rows after dropping non-standard missing values ('?'): 45,222. Class balance remains skewed: 75.22% of records are '<=50K' and 24.78% are '>50K'.
+Pattern 1: Education is the strongest broad predictor in the cleaned sample. 'education-num' shows the largest standardized mean gap between income classes (0.77 standard deviations), and the >50K rate ranges from 1.4% for 'Preschool' to 75.4% for 'Prof-school'.
+Pattern 2: Work intensity and capital-related variables should matter materially for prediction. Adults earning >50K work 45.69 hours per week on average versus 39.37 for the <=50K group, and 21.19% of >50K records have non-zero capital gain compared with 4.16% in the <=50K group.
+Pattern 3: Household and social-position features create strong categorical separation. The >50K rate is 48.6% for 'Wife' but only 1.6% for 'Own-child', which suggests relationship and marital-status variables can add substantial signal.
+Model training impact: the target is materially imbalanced, so evaluation should not rely on accuracy alone. Stratified splits and metrics such as PR-AUC, ROC-AUC, balanced accuracy, or class-specific recall will give a more faithful view of performance on the >50K class.
