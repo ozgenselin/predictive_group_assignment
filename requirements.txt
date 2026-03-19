@@ -13,3 +13,6 @@ ucimlrepo==0.0.7
 # Jupyter Notebook Support
 jupyter==1.0.0
 notebook==7.0.7
+
+# Data Visualization
+seaborn==0.13.2
