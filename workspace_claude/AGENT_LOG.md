@@ -9,6 +9,26 @@
 - **Verification Performed**: [What checks were run]
 
 ---
+## Entry 1
+- **Date/Time**: 2026-03-17T00:00:00Z
+- **Goal**: Schema validation and encoded missing-value detection for the UCI Adult Income dataset
+- **User Request**: Write a standalone Python script (`t1_schema_validation.py`) that loads `adult_income.csv`, produces a schema report (column names, dtypes, NaN counts, unique value counts for categoricals), detects non-standard/encoded missing values beyond NaN/blank, and prints a summary of the encoding used, total affected rows, and affected columns.
+- **Files Changed**: `workspace_claude/t1_schema_validation.py` (created)
+- **Summary of Edits**:
+  - Script loads the CSV via a path relative to its own location (no hardcoded absolute paths).
+  - Schema report iterates all 15 columns, printing dtype, NaN count, and unique-value count for object-dtype columns.
+  - Sentinel detection checks all object columns against a set of known encoded-missing patterns (`"?"`, `"N/A"`, `""`, etc.) using both exact and strip-whitespace matching.
+  - Row-level impact computed with a union mask across all flagged columns.
+  - Summary block reports encoding(s) found, total affected rows, and affected column names.
+- **Verification Performed**:
+  - Ran `python3 t1_schema_validation.py` from `workspace_claude/`.
+  - Confirmed 48,842 rows × 15 columns loaded correctly.
+  - Confirmed zero standard NaN values (pandas did not interpret `"?"` as NaN on load).
+  - Confirmed `"?"` sentinel found in `workclass` (2,799), `occupation` (2,809), `native-country` (857).
+  - Total affected rows = 3,620 (union of rows, not sum, since some rows have `"?"` in multiple columns).
+  - No hardcoded absolute paths present in the script.
+
+---
 
 ## Entry 2
 - **Date/Time**: 2026-03-17T13:14:00Z
@@ -96,23 +116,3 @@
 
 ---
 
-## Entry 1
-- **Date/Time**: 2026-03-17T00:00:00Z
-- **Goal**: Schema validation and encoded missing-value detection for the UCI Adult Income dataset
-- **User Request**: Write a standalone Python script (`t1_schema_validation.py`) that loads `adult_income.csv`, produces a schema report (column names, dtypes, NaN counts, unique value counts for categoricals), detects non-standard/encoded missing values beyond NaN/blank, and prints a summary of the encoding used, total affected rows, and affected columns.
-- **Files Changed**: `workspace_claude/t1_schema_validation.py` (created)
-- **Summary of Edits**:
-  - Script loads the CSV via a path relative to its own location (no hardcoded absolute paths).
-  - Schema report iterates all 15 columns, printing dtype, NaN count, and unique-value count for object-dtype columns.
-  - Sentinel detection checks all object columns against a set of known encoded-missing patterns (`"?"`, `"N/A"`, `""`, etc.) using both exact and strip-whitespace matching.
-  - Row-level impact computed with a union mask across all flagged columns.
-  - Summary block reports encoding(s) found, total affected rows, and affected column names.
-- **Verification Performed**:
-  - Ran `python3 t1_schema_validation.py` from `workspace_claude/`.
-  - Confirmed 48,842 rows × 15 columns loaded correctly.
-  - Confirmed zero standard NaN values (pandas did not interpret `"?"` as NaN on load).
-  - Confirmed `"?"` sentinel found in `workclass` (2,799), `occupation` (2,809), `native-country` (857).
-  - Total affected rows = 3,620 (union of rows, not sum, since some rows have `"?"` in multiple columns).
-  - No hardcoded absolute paths present in the script.
-
----
